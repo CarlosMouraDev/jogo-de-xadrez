@@ -24,14 +24,14 @@ public class Board {
     }
 
     public Piece piece(int row , int column) {
-        return pieces[row][column];
+        return pieces[column][row];
     }
 
     public Piece piece(Position position) {
-        if (!positionExists(position)) {
+        if (positionExists(position)) {
             throw new BoardException("Error creating Piece: there is no such position.");
         }
-        return pieces[position.getRow()][position.getColumn()];
+        return pieces[position.getColumn()][position.getRow()];
     }
 
     public void placePiece(Piece piece, Position position) {
@@ -47,11 +47,11 @@ public class Board {
     }
 
     public boolean positionExists(Position position) {
-        return positionExsists(position.getRow(), position.getColumn());
+        return !positionExsists(position.getRow(), position.getColumn());
     }
 
     public boolean thereIsAPiece(Position position) {
-        if (!positionExists(position)) {
+        if (positionExists(position)) {
             throw new BoardException("Error creating Piece: there is no such position.");
         }
         return piece(position) != null;
